@@ -1,0 +1,32 @@
+{
+  "manifest_version": 2,
+  "name": "danime-save-annict",
+  "version": "1.0.1",
+  "description": "dアニメの視聴結果をannictに送る",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://anime.dmkt-sp.jp/animestore/sc_d_pc?partId*"
+      ],
+      "js": [
+        "scripts/index.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "html/options.html",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "https://jp.annict.com/*",
+    "https://api.annict.com/oauth/token",
+    "https://kakunpc.com/danime.html",
+    "storage",
+    "unlimitedStorage",
+    "tabs"
+  ],
+  "web_accessible_resources":[
+    "js/iziToast.min.js",
+    "styles/iziToast.min.css"
+  ]
+}
