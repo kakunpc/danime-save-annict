@@ -2,6 +2,7 @@ import { fail } from "assert";
 
 var $ = require("jquery");
 var fetch = require('graphql-fetch')('https://api.annict.com/graphql')
+var k = (/ |　|・|～|-|&|＆|#|＃/g);
 
 var defaults = {
   token: ""
@@ -20,9 +21,9 @@ chrome.storage.sync.get(
 )
 
 // メッセージ用のボックスをInjectする
-$("<style type='text/css'> .dialog {  position: fixed;  bottom: 60px;  right: 10px; border: 1px solid #888888;  padding: 2pt;  background-color: #ffffff;  filter: alpha(opacity=85);  -moz-opacity: 0.85;  -khtml-opacity: 0.85;  opacity: 0.85;      text-shadow: 0 -1px 1px #FFF, -1px 0 1px #FFF, 1px 0 1px #aaa;  -webkit-box-shadow: 1px 1px 2px #eeeeee;  -moz-box-shadow: 1px 1px 2px #eeeeee;  -webkit-border-radius: 3px;  -moz-border-radius: 3px; display: none;} </style>").appendTo("head");
-$("<div/>").addClass("dialog").text('Message').appendTo("body");
-
+$("<style type='text/css'> .dsa-dialog {  position: fixed;  bottom: 60px;  right: 10px; border: 1px solid #888888;  padding: 2pt;  background-color: #ffffff;  filter: alpha(opacity=85);  -moz-opacity: 0.85;  -khtml-opacity: 0.85;  opacity: 0.85;      text-shadow: 0 -1px 1px #FFF, -1px 0 1px #FFF, 1px 0 1px #aaa;  -webkit-box-shadow: 1px 1px 2px #eeeeee;  -moz-box-shadow: 1px 1px 2px #eeeeee;  -webkit-border-radius: 3px;  -moz-border-radius: 3px; display: none;} </style>").appendTo("head");
+$("<div/>").addClass("dsa-dialog").text('Message').appendTo("body");
+var dsaDialog = $(".dsa-dialog")
 // Controllerが表示されていたら移動させたい
 // dialog.animate({'bottom':'10px','right':'10px'},500);
 // dialog.animate({'bottom':'60px','right':'10px'},500);
@@ -38,20 +39,26 @@ function sendAnnict() {
   if (access_token == "") {
     return
   }
+  console.log("send Start")
   var animeTitle = $(".backInfoTxt1").text();
   var animeEpisodeNumber = $(".backInfoTxt2").text();
   var animeEpisodeTitle = $(".backInfoTxt3").text();
 
 
-  var k = (/ |　|・|～/g);
   var ext2 = animeTitle.split(k);
   var animeNumber = title2number(animeEpisodeNumber)
 
   fetchWork(ext2[0], function (result) {
+    if( result.length <= 0 ){
+      console.log("No Hit Title. " + ext2[0])
+      showMessage("No Hit Title. " + animeTitle)
+      return
+    }
+    var sendResult = false
     for (var i = 0; i < result.length; ++i) {
       var node = result[i].node
       var checkState = checkTitle(animeTitle, node.title)
-
+      //console.log(node.title + ":" + checkState)
       if (checkState) {
         console.log(node.title)
         var episodes = node.episodes.edges
@@ -69,21 +76,24 @@ function sendAnnict() {
             postRecord(episode.annictId, function (status) {
               showMessage(animeTitle + " " + animeEpisodeNumber + " Annict send " + status + ".")
             })
+            sendResult = true
             break
           }
         }
         break
       }
     }
+    if( sendResult == false){
+      showMessage(animeTitle + " " + animeEpisodeNumber + " Annict send false.")
+    }
   })
 }
 
 function showMessage(message) {
-  var dialog = $(".dialog")
-  dialog.text(message)
-  dialog.hide().fadeIn('slow', function () {
+  dsaDialog.text(message)
+  dsaDialog.hide().fadeIn('slow', function () {
     setTimeout(function () {
-      dialog.fadeOut('slow')
+      dsaDialog.fadeOut('slow')
     }, 5000);
   })
 }
@@ -227,7 +237,6 @@ function checkTitle(title1, title2) {
     return false
   }
 
-  var k = (/ |　|・|～/g);
   var title1Array = title1.split(k);
 
   var title2Array = title2.split(k);
