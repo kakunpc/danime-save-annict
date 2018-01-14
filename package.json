@@ -1,6 +1,6 @@
 {
   "name": "danime-save-annict",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "dアニメストアの視聴結果をannictに送るchrome拡張",
   "scripts": {
     "build": "gulp build",
