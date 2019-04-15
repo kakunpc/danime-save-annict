@@ -18,7 +18,7 @@
     "babel-register": "6.26.0",
     "fs": "0.0.1-security",
     "graphql-fetch": "1.0.1",
-    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp": "github:gulpjs/gulp#v4.0.0",
     "gulp-rework": "1.2.0",
     "gulp-shell": "0.6.5",
     "izitoast": "1.4.0",
