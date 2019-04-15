@@ -16,7 +16,7 @@
     "babel-plugin-transform-class-properties": "6.24.1",
     "babel-preset-env": "1.7.0",
     "babel-register": "6.26.0",
-    "fs": "0.0.1-security",
+    "fs": "0.0.2",
     "graphql-fetch": "1.0.1",
     "gulp": "github:gulpjs/gulp#v4.0.0",
     "gulp-rework": "1.2.0",
