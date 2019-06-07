@@ -20,7 +20,7 @@
     "graphql-fetch": "1.0.1",
     "gulp": "github:gulpjs/gulp#v4.0.0",
     "gulp-rework": "1.2.0",
-    "gulp-shell": "0.6.5",
+    "gulp-shell": "0.7.1",
     "izitoast": "1.4.0",
     "jquery": "3.4.0",
     "path": "0.12.7",
