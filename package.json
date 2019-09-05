@@ -24,7 +24,7 @@
     "jquery": "3.4.0",
     "path": "0.12.7",
     "prototype": "0.0.5",
-    "query-string": "5.1.1",
+    "query-string": "6.8.3",
     "rework-npm": "1.0.0",
     "webpack": "4.39.3",
     "webpack-stream": "4.0.3"
