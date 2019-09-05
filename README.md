@@ -12,3 +12,6 @@ $ npm run build
 
 ## License
 MIT
+
+## Build Status
+[![CircleCI](https://circleci.com/gh/kakunpc/danime-save-annict.svg?style=svg)](https://circleci.com/gh/kakunpc/danime-save-annict)
