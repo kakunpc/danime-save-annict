@@ -27,6 +27,6 @@
     "query-string": "6.8.3",
     "rework-npm": "1.0.0",
     "webpack": "4.39.3",
-    "webpack-stream": "4.0.3"
+    "webpack-stream": "5.2.1"
   }
 }
