@@ -14,4 +14,4 @@ $ npm run build
 MIT
 
 ## Build Status
-[![CircleCI](https://circleci.com/gh/kakunpc/danime-save-annict.svg?style=svg)](https://circleci.com/gh/kakunpc/danime-save-annict)
+[![CircleCI](https://circleci.com/gh/kakunpc/danime-save-annict/tree/master.svg?style=svg)](https://circleci.com/gh/kakunpc/danime-save-annict/tree/master)
