@@ -25,7 +25,10 @@
     "unlimitedStorage",
     "tabs"
   ],
-  "web_accessible_resources":[
+  "icons": {
+    "128": "img/icon128.png"
+  },
+  "web_accessible_resources": [
     "js/iziToast.min.js",
     "styles/iziToast.min.css"
   ]
