@@ -1,8 +1,6 @@
 
-var $ = require("jquery");
-
 // メッセージ用のボックスをInjectする
-var s = document.createElement('script');
+const s = document.createElement('script');
 s.src = chrome.extension.getURL('js/iziToast.min.js');
 s.onload = function () {
     this.remove();
@@ -15,28 +13,33 @@ link.type = "text/css";
 link.rel = "stylesheet";
 (document.head || document.documentElement).appendChild(link);
 
-$(function () {
+window.onload = function () {
+    $("#save").on("click", function () {
+        chrome.storage.sync.set({
+            token: $("#token").val(),
+            nextButtonSend: $("#nextButtonSend").val(),
+            sendDelaySecond: $("#sendDelaySecond").val()
+        });
+        iziToast.show({
+            title: "OK",
+            message: "保存しました"
+        })
+    });
+
     $("#shawOAuth").click(function () {
         window.open("https://kakunpc.com/danime/openAnnict.php", '', 'location=no, width=640, height=480');
     });
 
-    $("#save").click(function () {
-        var token = $("#message").val()
-        chrome.storage.sync.set({ token: token }, function () {
-            iziToast.show({
-                title: "OK",
-                message: "保存しました"
-            })
-        })
-    });
-
-    var defaults = {
-        token: ""
-    }
     chrome.storage.sync.get(
-        defaults,
-        function (items) {
-            $("#message").val(items.token);
+        {
+            token: "",
+            nextButtonSend: false,
+            sendDelaySecond: 300
+        },
+        items => {
+            $("#token").val(items.token);
+            $("#nextButtonSend").prop('checked', items.nextButtonSend);
+            $("#sendDelaySecond").val(items.sendDelaySecond);
         }
-    )
-});
+    );
+};
